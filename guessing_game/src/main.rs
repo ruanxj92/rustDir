@@ -3,7 +3,7 @@ use std::io;
 use rand::Rng;
 fn main() {
     let secret_number = rand::thread_rng().gen_range(1..101);// i32
-    println!("secrt_number is {secret_number}");
+    // println!("secrt_number is {secret_number}");
 
     loop {
         println!("guess a number ");
@@ -11,10 +11,11 @@ fn main() {
         match io::stdin()
         .read_line(&mut guess){
             Ok(size) => {
-                println!("match {}", size);
+                println!("read length: {}", size);
+                println!("read: {}", guess);
             }
             Err(what_error)=> {
-                println!("match {}", what_error.to_string());
+                println!("read stdin error: {}", what_error.to_string());
                 return ;
             }
         };
