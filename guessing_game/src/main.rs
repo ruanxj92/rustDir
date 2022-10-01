@@ -4,12 +4,20 @@ use rand::Rng;
 fn main() {
     let secret_number = rand::thread_rng().gen_range(1..101);// i32
     println!("secrt_number is {secret_number}");
-    let mut guess = String::new();
+
     loop {
         println!("guess a number ");
-        io::stdin()
-        .read_line(&mut guess)
-        .expect("cannot read line");
+        let mut guess = String::new();
+        match io::stdin()
+        .read_line(&mut guess){
+            Ok(size) => {
+                println!("match {}", size);
+            }
+            Err(what_error)=> {
+                println!("match {}", what_error.to_string());
+                return ;
+            }
+        };
         
         println!("you guess:{}", guess);
         //shadow same name
@@ -17,10 +25,10 @@ fn main() {
             Ok(num) => {
                 println!("match num");
                 num
-            }
-            Err(_) => {
-                println!("match error");
-                continue
+            },
+            Err(parse_error) => {
+                println!("match error: {}", parse_error.to_string());
+                continue;
             }
         };
         
